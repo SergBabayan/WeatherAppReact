@@ -1,0 +1,62 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+  
+  .modal.open {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  
+  .modal-content {
+    width: 300px;
+    height: 310px;
+    border: 2px solid #181c29;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .modal.open .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+  }
+.h1 {
+    margin-left: 9px;
+    font-size: 22px;
+    margin-bottom: 260px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    color: #181c29;
+}
+#button2 {
+    width: 100px;
+    height: 40px;
+    margin-top: 240px;
+    font-size: 20px;
+    position: absolute;
+}
+.image1 {
+    width: 200px;
+    height: 180px;
+    margin-top: -10px;
+    border-radius: 15px;
+}
