@@ -1,5 +1,7 @@
 import React from "react";
+import { Button } from "@mui/material";
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [color, setColor] = useState("#fff");
@@ -11,13 +13,13 @@ function App() {
 
     const newcolor = `rgb(${num1}, ${num2}, ${num3})`;
     console.log(num1, num2, num3);
-    document.body.style.transition = '1s ease';
+    document.body.style.transition = '0.5s';
     setColor(document.body.style.backgroundColor = newcolor);
   } 
 
   return(
     <div>
-      <button onClick={New}>Click</button>
+      <Button style={{width: 100}} variant="contained" onClick={New}>Click</Button>
     </div>
   )
 }
