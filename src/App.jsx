@@ -1,33 +1,25 @@
-import React, { useState } from 'react';
-import { Button } from '@mui/material';
-import gif from './Images/gif1.gif';
-import "./App.css"
+import React from "react";
+import { useState } from "react";
 
-function Modal() {
-  const [open, neopen] = useState(false);
+function App() {
+  const [color, setColor] = useState("#fff");
+  document.body.style.backgroundColor = color;
+  const New = () => {
+    const num1 = Math.floor(Math.random() * 256);
+    const num2 = Math.floor(Math.random() * 256);
+    const num3 = Math.floor(Math.random() * 256);
 
-  const openn = () => {
-    neopen(true);
-  }
+    const newcolor = `rgb(${num1}, ${num2}, ${num3})`;
+    console.log(num1, num2, num3);
+    document.body.style.transition = '1s ease';
+    setColor(document.body.style.backgroundColor = newcolor);
+  } 
 
-  const closed = () => {
-    neopen(false);
-  }
-
-  return (
+  return(
     <div>
-      <Button onClick={openn} variant="contained">Click</Button>
-      <hr />
-      <div className={`modal ${open ? "open" : ""}`}>
-        <div className="modal-content">
-          <h1 className="h1">You opened the Modal</h1>
-          <img src={gif} className='image1'/>
-          <Button id="button2" onClick={closed} variant="outlined" color="primary">Close</Button>
-        </div>
-      </div>
+      <button onClick={New}>Click</button>
     </div>
   )
 }
 
-
-export default Modal;
+export default App;
