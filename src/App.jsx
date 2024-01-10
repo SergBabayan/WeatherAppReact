@@ -1,27 +1,49 @@
-import React from "react";
-import { Button } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { Button, TextField } from "@mui/material";
+import { useSpring, animated } from "react-spring";
 import "./App.css";
 
-function App() {
-  const [color, setColor] = useState("#fff");
-  document.body.style.backgroundColor = color;
-  const New = () => {
-    const num1 = Math.floor(Math.random() * 256);
-    const num2 = Math.floor(Math.random() * 256);
-    const num3 = Math.floor(Math.random() * 256);
 
-    const newcolor = `rgb(${num1}, ${num2}, ${num3})`;
-    console.log(num1, num2, num3);
-    document.body.style.transition = '0.5s';
-    setColor(document.body.style.backgroundColor = newcolor);
-  } 
+function GetWheather() {
+  const [City, SetCity] = useState('');
+  const [Weather, SetWeather] = useState(null);
 
-  return(
-    <div>
-      <Button style={{width: 100}} variant="contained" onClick={New}>Click</Button>
+  const Wheather = async() => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${City}&appid=8ab12ca5d224531b8df784d34fe17194`
+      );
+      SetWeather(response.data);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  const fade = useSpring({
+    opacity: Weather ? 1 : 0,
+    from: { opacity: 0 },
+  });
+
+  const kelvinToCelsius = (kelvin) => {
+    return kelvin - 273.15;
+  };
+
+  return (
+    <div className="centered-content">
+      <h2>Weather App</h2>
+      <TextField id="outlined-textarea" label="Введите название" multiline type="text" placeholder="City name..." value={City} onChange={(e) => SetCity(e.target.value)}/>
+      <Button id="btn1" variant="contained" size="small" onClick={Wheather}>Get Wheather</Button>
+      <hr />
+      {Weather && (
+        <animated.div style={fade}>
+          <h3>{Weather.name}</h3>
+          <p>Temperature: {kelvinToCelsius(Weather.main.temp).toFixed(2)} °C</p>
+          <p>Weather: {Weather.weather[0].description}</p>
+        </animated.div>
+      )}
     </div>
   )
 }
 
-export default App;
+export default GetWheather;
